@@ -16,6 +16,11 @@ const UserSchema = mongoose.Schema({
     required: [true, 'Senha requerida.'],
     min: [6, 'Senha deve ter pelo menos 6 caracteres.'],
   },
+
+  update_login: {
+    type: Date,
+    default: Date.now
+  },
 });
 
 export default UserSchema;
