@@ -1,7 +1,8 @@
 import mongoose from 'mongoose';
 
+import ErrorHandle from '../errors/ErrorHandle.js';
 import UserModel from '../models/User.js';
-import crypt from '../cryptor/bcrypt.js';
+import bcrypt from '../services/auth/bcrypt.js';
 
 class UserController {
   constructor() {
@@ -14,11 +15,8 @@ class UserController {
       const user = await this.User.findById(id, 'name userName update_login');
       return res.status(200).json(user);
     } catch (err) {
-      console.log(err);
-      if (err.nome = 'Validation Error') {
-        return res.status(400).json(err);
-      }
-      return res.status(500).json({ erro: 'Erro de servidor, tente novamente mais tarde.' });
+      const errorHandle = ErrorHandle.badRequestErro(err);
+      res.status(errorHandle.status).json(errorHandle.error);
     }
   }
 
@@ -26,17 +24,14 @@ class UserController {
     try {
       const { name, userName, password } = req.body;
 
-      const hash = await crypt.encrypt(password);
+      const hash = await bcrypt.encrypt(password);
       const user = new this.User({ name, userName, password: hash });
       await user.save();
 
       return res.status(200).json({ message: 'Usuário criado com sucesso!' });
     } catch (err) {
-      console.log(err);
-      if (err.name === 'ValidationError') {
-        return res.status(400).json(err);
-      }
-      return res.status(500).json({ erro: 'Erro de servidor, tente novamente mais tarde.' });
+      const errorHandle = ErrorHandle.badRequestErro(err);
+      res.status(errorHandle.status).json(errorHandle.error);
     }
   }
 }
