@@ -6,3 +6,5 @@ const route = Router();
 
 route.get('/', UserController.findById);
 route.post('/', UserController.crateUser);
+
+export default route;

@@ -9,6 +9,7 @@ const UserSchema = mongoose.Schema({
   userName: {
     type: String,
     required: [true, 'Nomde de usuário requerido.'],
+    unique: [true, 'Nome de usuário já existente.'],
   },
 
   password: {
