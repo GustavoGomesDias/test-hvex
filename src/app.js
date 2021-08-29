@@ -1,6 +1,9 @@
+/* eslint-disable no-unused-vars */
 import express from 'express';
 import mongoose from 'mongoose';
-import UserRoute from './routes/UserRoute.js';
+
+import UserModel from './models/User.js'
+import UserRoute from './routes/User.js';
 
 const app = express();
 
@@ -14,7 +17,7 @@ app.use(express.json());
 
 app.use('/', UserRoute);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3001;
 
 app.listen(port, () => {
   console.log(`[server]: Server is running at ${port}`);

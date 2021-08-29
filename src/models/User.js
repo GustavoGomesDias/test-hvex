@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, 'Nome requerido.'],
@@ -24,4 +24,14 @@ const UserSchema = mongoose.Schema({
   },
 });
 
-export default UserSchema;
+UserSchema.path('userName').validate(
+  async (userName) => {
+    // Se existir, retorna 1
+    const userNameCount = await mongoose.model('users').countDocuments({ userName });
+    
+    // !1 === false
+    return !userNameCount;
+  }, 'Nome de usuário já existente.',
+);
+
+export default mongoose.model('users', UserSchema);
