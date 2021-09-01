@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
 
   update_login: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
 });
 
@@ -28,7 +28,7 @@ UserSchema.path('userName').validate(
   async (userName) => {
     // Se existir, retorna 1
     const userNameCount = await mongoose.model('users').countDocuments({ userName });
-    
+
     // !1 === false
     return !userNameCount;
   }, 'Nome de usuário já existente.',
