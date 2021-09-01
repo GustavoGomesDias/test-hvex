@@ -50,13 +50,29 @@ class UserController {
           name,
           userName,
         },
-      }, {
-        runValidators: true,
       });
 
       return res.status(200).json({ message: 'Usuário atualizado com sucesso!' });
     } catch (err) {
-      const errorHandle = ErrorHandle.badRequestError(err);
+      const errorHandle = ErrorHandle.notFoundError(err);
+      return res.status(errorHandle.status).json(errorHandle.errors);
+    }
+  }
+
+  async deleteUser(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (validations.validationField(id)) {
+        const errorHandle = ErrorHandle.notFoundError(null);
+        return res.status(errorHandle.status).json(errorHandle.errors);
+      }
+
+      await UserModel.findByIdAndDelete(id);
+
+      return res.status(200).json({ message: 'Usuário deletado com sucesso.' });
+    } catch (err) {
+      const errorHandle = ErrorHandle.notFoundError(err);
       return res.status(errorHandle.status).json(errorHandle.errors);
     }
   }
