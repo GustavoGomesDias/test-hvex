@@ -29,7 +29,7 @@ class ErrorHandler {
 
   notFoundError(err) {
     if (err instanceof mongoose.Error.CastError || err === null) {
-      return { status: 400, errors: { errorss: 'Usuário não existe.' } };
+      return { status: 400, errors: { errors: 'Usuário não existe.' } };
     }
     console.log(err);
     return { status: 500, errors: { errors: 'Error interno. Tente novamente mais tarde.' } };

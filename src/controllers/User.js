@@ -38,14 +38,14 @@ class UserController {
 
   async updateUser(req, res) {
     try {
-      const { id, name, userName } = req.body;
+      const { name, userName } = req.body;
 
-      if (validations.validationField(id)) {
+      if (validations.validationField(req.userId)) {
         const errorHandle = ErrorHandle.notFoundError(null);
         return res.status(errorHandle.status).json(errorHandle.errors);
       }
 
-      await UserModel.findByIdAndUpdate(id, {
+      await UserModel.findByIdAndUpdate(req.userId, {
         $set: {
           name,
           userName,
@@ -61,14 +61,12 @@ class UserController {
 
   async deleteUser(req, res) {
     try {
-      const { id } = req.params;
-
-      if (validations.validationField(id)) {
+      if (validations.validationField(req.userId)) {
         const errorHandle = ErrorHandle.notFoundError(null);
         return res.status(errorHandle.status).json(errorHandle.errors);
       }
 
-      await UserModel.findByIdAndDelete(id);
+      await UserModel.findByIdAndDelete(req.userId);
 
       return res.status(200).json({ message: 'Usuário deletado com sucesso.' });
     } catch (err) {

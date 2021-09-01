@@ -9,6 +9,13 @@ class TokenController {
       const { userName, password } = req.body;
 
       const user = await UserModel.findOne({ userName });
+
+      if (!user) {
+        const errors = ErrorHandler.notFoundError(null);
+
+        return res.status(errors.status).json(errors.errors);
+      }
+
       const compare = await auth.compare(password, user.password);
       if (!compare) {
         const errors = ErrorHandler.unauthorizedError(false);
