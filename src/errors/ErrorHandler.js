@@ -24,15 +24,22 @@ class ErrorHandler {
       return { status: 400, errors: { errors: { ...errors } } };
     }
     console.log(err);
-    return { status: 500, msg: { error: 'Error interno. Tente novamente mais tarde.' } };
+    return { status: 500, errors: { errors: 'Error interno. Tente novamente mais tarde.' } };
   }
 
   notFoundError(err) {
     if (err instanceof mongoose.Error.CastError || err === null) {
-      return { status: 400, errors: { errors: 'Usuário não existe.' } };
+      return { status: 400, errors: { errorss: 'Usuário não existe.' } };
     }
     console.log(err);
-    return { status: 500, msg: { error: 'Error interno. Tente novamente mais tarde.' } };
+    return { status: 500, errors: { errors: 'Error interno. Tente novamente mais tarde.' } };
+  }
+
+  unauthorizedError(errorToken) {
+    if (errorToken) {
+      return { status: 401, errors: { errors: 'Token expirado.' } };
+    }
+    return { status: 401, errors: { errors: 'Erro de login.' } };
   }
 }
 

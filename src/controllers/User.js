@@ -1,5 +1,5 @@
 import ErrorHandle from '../errors/ErrorHandler.js';
-import bcrypt from '../services/auth/bcrypt.js';
+import auth from '../services/auth/auth.js';
 import UserModel from '../models/User.js';
 import validations from '../validations/validations.js';
 
@@ -25,7 +25,7 @@ class UserController {
     try {
       const { name, userName, password } = req.body;
 
-      const hash = await bcrypt.encrypt(password.toString());
+      const hash = await auth.encrypt(password.toString());
       const user = new UserModel({ name, userName, password: hash });
       await user.save();
 

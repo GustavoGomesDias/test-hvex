@@ -1,9 +1,15 @@
+/* eslint-disable import/first */
 /* eslint-disable no-unused-vars */
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 import express from 'express';
 import mongoose from 'mongoose';
 
-import UserModel from './models/User.js'
+import UserModel from './models/User.js';
 import UserRoute from './routes/User.js';
+import TokenRoute from './routes/Token.js';
 
 const app = express();
 
@@ -16,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/', UserRoute);
+app.use('/', TokenRoute);
 
 const port = process.env.PORT || 3001;
 
