@@ -6,6 +6,8 @@ dotenv.config();
 
 import express from 'express';
 import mongoose from 'mongoose';
+import fs from 'fs';
+import swaggerUI from 'swagger-ui-express';
 
 import UserModel from './models/User.js';
 import UserRoute from './routes/User.js';
@@ -20,6 +22,9 @@ mongoose.connect('mongodb://localhost:27017/hvex', {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+const swaggerDoc = JSON.parse(fs.readFileSync(new URL('./swagger.json', import.meta.url)));
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDoc));
 
 app.use('/', UserRoute);
 app.use('/', TokenRoute);

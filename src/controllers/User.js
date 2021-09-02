@@ -25,6 +25,10 @@ class UserController {
     try {
       const { name, userName, password } = req.body;
 
+      if (!password || password.length < 6) {
+        return res.status(400).json({ errors: { password: 'Senha inválida' } });
+      }
+
       const hash = await auth.encrypt(password.toString());
       const user = new UserModel({ name, userName, password: hash });
       await user.save();

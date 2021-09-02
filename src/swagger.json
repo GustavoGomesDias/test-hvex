@@ -1,0 +1,253 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Job Test - HVEX",
+    "description": "API desenvolvida como teste para uma vaga de Dev. JR na HVEX",
+    "contact": {
+      "email": "01gustavodias@gmail.com"
+    },
+    "version": "1.0.0",
+    "licence": {
+      "name": "MIT License"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001/",
+      "description": "Local Host API Test"
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Cadastro de usuário",
+        "description": "Rota responsável por cadastrar um novo usuário.",
+        "tags": ["Users"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gustavo",
+                    "userName": "Gustavo",
+                    "password": "123abc"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "400": {
+            "description": {
+              "name": "Nome requerido.",
+              "userName": ["Nome de usuário requerido.", "Nome de usuário já existente."],
+              "password": "Senha inválida"
+            }
+          },
+          "500": {
+            "description": "Error interno. Tente novamente mais tarde."
+          },
+          "200": {
+            "description": "Usuário criado com sucesso!"
+          }
+        }
+      },
+      "put": {
+        "summary": "Atualização dos dados do usuário",
+        "description": "Rota responsável por atualizar os dados do usuário.",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gustavo",
+                    "userName": "Gustavo"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "404": {
+            "description": "Usuário não existe."
+          },
+          "401": {
+            "description": ["Token expirado.", "Erro de login."]
+          },
+          "500": {
+            "description": "Error interno. Tente novamente mais tarde."
+          },
+          "200": {
+            "description": "Usuário atualizado com sucesso!"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Deleta um usuário",
+        "description": "Deleta um usuário por ID.",
+        "tags": ["Users"],
+        "security": [{ "bearerAuth": [] }],
+        "responses": {
+          "404": {
+            "description": "Usuário não existe."
+          },
+          "401": {
+            "description": ["Token expirado.", "Erro de login."]
+          },
+          "500": {
+            "description": "Error interno. Tente novamente mais tarde."
+          },
+          "200": {
+            "description": "Usuário deletado com sucesso!"
+          }
+        }
+      }
+    },
+    "/{id}": {
+      "get": {
+        "summary": "Retorna um usuário baseado no ID",
+        "description": "Retorna um usuário baseado no ID",
+        "tags": ["Users", "User"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de um usuário.",
+            "required": true
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Usuário não existe."
+          },
+          "500": {
+            "description": "Error interno. Tente novamente mais tarde."
+          },
+          "200": {
+            "description": "OK!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "summary": "Login",
+        "description": "Rota para se fazer login.",
+        "tags": ["Token"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Users"
+              },
+              "examples": {
+                "user": {
+                  "value": {
+                    "name": "Gustavo",
+                    "password": "123abc"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": ["Token expirado.", "Erro de login."]
+          },
+          "404": {
+            "description": "Usuário não existe."
+          },
+          "500": {
+            "description": "Error interno. Tente novamente mais tarde."
+          },
+          "200": {
+            "description": "OK!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JWT-Token"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Users": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "userName": {
+            "type": "string"
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "JWT-Token": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
