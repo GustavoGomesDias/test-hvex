@@ -11,7 +11,7 @@ CRUD com login
 ## 📕 Sumário
 1. [Tecnologias usadadas](https://github.com/GustavoGomesDias/test-hvex#1--tecnologias-usadas)
 2. [Para rodar o projeto LOCALMENTE](https://github.com/GustavoGomesDias/test-hvex#2--para-rodar-o-projeto-localmente)
-3. [Configurar variáveis de ambiente](https://github.com/GustavoGomesDias/test-hvex#3-vari%C3%A1veis-de-ambiente-necess%C3%A1rio-no-heroku-tamb%C3%A9m)
+3. [Configurar variáveis de ambiente](https://github.com/GustavoGomesDias/test-hvex#3--vari%C3%A1veis-de-ambiente-necess%C3%A1rio-no-heroku-tamb%C3%A9m)
 
 ## 1. 💻 Tecnologias usadas
 * NodeJS;
@@ -53,8 +53,11 @@ CRUD com login
 
 ## 3.  Variáveis de Ambiente (necessário no Heroku também)
 `TOKEN_EXPIRATION`: Tempo em que o token gerado ao fazer login irá ficar ativo (lembrando que é um token JWT);
+
 `TOKEN_SECRET`: Palavra secreta uada na hora de gerar o token (token JWT);
+
 `DATABASE_PASSWORD`: (Usado apenas se for usar o Mongodb Atlas) Senha do admin do banco de dados no Mongodb Atlas;
+
 `DATABASE_USER`: (Usado apenas se for usar o Mongodb Atlas) Nome de usuário do admin do banco de dados no Mongodb Atlas
 
 ## Autor
