@@ -13,7 +13,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3001/",
+      "url": "https://hvex.herokuapp.com",
       "description": "Local Host API Test"
     }
   ],
@@ -256,7 +256,7 @@
     },
     "securitySchemes": {
       "bearerAuth": {
-        "type": "http",
+        "type": "https",
         "scheme": "bearer",
         "bearerFormat": "JWT"
       }
