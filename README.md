@@ -16,6 +16,7 @@ CRUD com login
 ## 1. 💻 Tecnologias usadas
 * NodeJS;
 * MongoDB;
+* Express;
 * Mongoose;
 * Swagger;
 * Bcrypt;
