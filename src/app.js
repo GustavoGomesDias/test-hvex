@@ -15,10 +15,10 @@ import TokenRoute from './routes/Token.js';
 
 const app = express();
 
-mongoose.connect('mongodb://localhost:27017/hvex', {
+mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.swfjk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-});
+}).catch((err) => console.log(err));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
