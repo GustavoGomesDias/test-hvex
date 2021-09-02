@@ -52,14 +52,23 @@ CRUD com login
 
 5. Caso use uma ferramenta de teste de requisições, utilize http://localhost:3001 para usar a API
 
-## 3.  Variáveis de Ambiente (necessário no Heroku também)
+## 3. 🔐 Variáveis de Ambiente (necessário no Heroku também)
 `TOKEN_EXPIRATION`: Tempo em que o token gerado ao fazer login irá ficar ativo (lembrando que é um token JWT);
 
 `TOKEN_SECRET`: Palavra secreta uada na hora de gerar o token (token JWT);
 
 `DATABASE_PASSWORD`: (Usado apenas se for usar o Mongodb Atlas) Senha do admin do banco de dados no Mongodb Atlas;
 
-`DATABASE_USER`: (Usado apenas se for usar o Mongodb Atlas) Nome de usuário do admin do banco de dados no Mongodb Atlas
+`DATABASE_USER`: (Usado apenas se for usar o Mongodb Atlas) Nome de usuário do admin do banco de dados no Mongodb Atlas.
+
+
+## 4. 📋 To Do do teste
+
+- [x] CREATE
+- [x] READ
+- [x] UPDATE
+- [x] DELETE
+- [x] Atualizar quando o usuário fizer login 
 
 ## Autor
 <table>
