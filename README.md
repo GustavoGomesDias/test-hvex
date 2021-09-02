@@ -12,6 +12,7 @@ CRUD com login
 1. [Tecnologias usadadas](https://github.com/GustavoGomesDias/test-hvex#1--tecnologias-usadas)
 2. [Para rodar o projeto LOCALMENTE](https://github.com/GustavoGomesDias/test-hvex#2--para-rodar-o-projeto-localmente)
 3. [Configurar variáveis de ambiente](https://github.com/GustavoGomesDias/test-hvex#3--vari%C3%A1veis-de-ambiente-necess%C3%A1rio-no-heroku-tamb%C3%A9m)
+4. [To Do do teste](https://github.com/GustavoGomesDias/test-hvex/blob/main/README.md#4--to-do-do-teste)
 
 ## 1. 💻 Tecnologias usadas
 * NodeJS;
