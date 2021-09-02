@@ -53,7 +53,15 @@
             "description": "Error interno. Tente novamente mais tarde."
           },
           "200": {
-            "description": "Usuário criado com sucesso!"
+            "description": "Usuário criado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
           }
         }
       },
@@ -119,7 +127,7 @@
       "get": {
         "summary": "Retorna um usuário baseado no ID",
         "description": "Retorna um usuário baseado no ID",
-        "tags": ["Users", "User"],
+        "tags": ["User"],
         "parameters": [
           {
             "name": "id",
@@ -163,7 +171,7 @@
               "examples": {
                 "user": {
                   "value": {
-                    "name": "Gustavo",
+                    "userName": "Gustavo",
                     "password": "123abc"
                   }
                 }
@@ -214,18 +222,22 @@
       "User": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "string"
+          },
           "name": {
             "type": "string"
           },
           "userName": {
             "type": "string"
-          }
+          },
+          "update_login": "string"
         }
       },
       "Token": {
         "type": "object",
         "properties": {
-          "name": {
+          "userName": {
             "type": "string"
           },
           "password": {

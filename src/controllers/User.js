@@ -32,8 +32,9 @@ class UserController {
       const hash = await auth.encrypt(password.toString());
       const user = new UserModel({ name, userName, password: hash });
       await user.save();
+      const userReturn = await UserModel.findOne(req.userId, '_id name userName update_login');
 
-      return res.status(200).json({ message: 'Usuário criado com sucesso!' });
+      return res.status(200).json({ message: 'Usuário criado com sucesso!', user: userReturn });
     } catch (err) {
       const errorHandle = ErrorHandle.badRequestError(err);
       return res.status(errorHandle.status).json(errorHandle.errors);
